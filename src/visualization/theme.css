@@ -1,0 +1,129 @@
+/* ============================================
+   Azr.AI Dashboard Theme — Coral & Ocean
+   ============================================ */
+
+/* Root variables */
+:root {
+    --abyss-navy: #0A1929;
+    --deep-ocean: #132F4C;
+    --coral-orange: #FF7043;
+    --shallow-teal: #4DD0E1;
+    --kelp-green: #66BB6A;
+    --sunlit-sand: #FFB74D;
+    --bleached-coral: #E57373;
+    --foam-white: #F5F7FA;
+    --mist-gray: #B0BEC5;
+    --reef-line: #1E3A5F;
+}
+
+/* Main container */
+.main {
+    background: linear-gradient(180deg, #0A1929 0%, #0F2438 100%);
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: var(--foam-white) !important;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background: linear-gradient(135deg, #132F4C 0%, #1A3A5C 100%);
+    border: 1px solid var(--reef-line);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-2px);
+    border-color: var(--coral-orange);
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--coral-orange) !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--mist-gray) !important;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0F2438 0%, #0A1929 100%);
+    border-right: 1px solid var(--reef-line);
+}
+
+/* Buttons */
+.stButton > button {
+    background: var(--coral-orange);
+    color: var(--abyss-navy);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 24px;
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+    background: var(--shallow-teal);
+    color: var(--abyss-navy);
+    transform: scale(1.02);
+}
+
+/* Radio buttons (menu) */
+[role="radiogroup"] label {
+    color: var(--mist-gray) !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+[role="radiogroup"] label:hover {
+    background: var(--deep-ocean);
+    color: var(--foam-white) !important;
+}
+
+/* Selectbox, slider */
+.stSelectbox, .stSlider {
+    color: var(--foam-white);
+}
+
+/* Dataframe */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--reef-line);
+    border-radius: 8px;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background: transparent;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: var(--deep-ocean);
+    color: var(--mist-gray);
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.stTabs [aria-selected="true"] {
+    background: var(--coral-orange);
+    color: var(--abyss-navy);
+    font-weight: 600;
+}
+
+/* Divider */
+hr {
+    border-color: var(--reef-line);
+    opacity: 0.4;
+}
