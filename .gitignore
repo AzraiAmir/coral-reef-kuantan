@@ -1,22 +1,25 @@
-# Python
-# OneDrive symlinks (machine-specific)
+# ============================================================
+# Azr.AI — .gitignore
+# ============================================================
+
+# --- OneDrive symlinks (machine-specific) ---
 data
 models
 
-# Phase A outputs
+# --- Phase A outputs (regenerate via pipeline) ---
 acquisition_logs/
 coral_metadata.db
 *.db
 *.sqlite
 
-# Model binaries (re-download via Phase 3)
+# --- Model binaries (re-download via Phase 3) ---
 *.pt
 *.pth
-yolov8m.pt
-yolo11n-obb.pt
 
-# Utility scripts (optional — uncomment to exclude)
-# reorganize.bat
+# --- Utility scripts ---
+reorganize.bat
+
+# --- Python artefacts ---
 __pycache__/
 *.py[cod]
 *$py.class
@@ -39,40 +42,46 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.pyc
+*.pyo
+*.pyd
 
-# Virtual environments
+# --- Virtual environments ---
 venv/
 env/
 ENV/
 env.bak/
 venv.bak/
 
-# IDE
+# --- IDE ---
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS
+# --- OS ---
 .DS_Store
 Thumbs.db
 
-# Project-specific
+# --- Project-specific ---
 data/raw/*
 data/processed/*
 data/annotations/*.json
 data/annotations/*.csv
-results/*
 models/trained/*/weights/*.pt
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/annotations/.gitkeep
-!results/.gitkeep
 !models/trained/.gitkeep
 *.log
 
-# Streamlit
+# --- Results outputs (regenerate via pipeline) ---
+results/*
+!results/**/.gitkeep
+!results/.gitkeep
+
+# --- Streamlit ---
 .streamlit/secrets.toml
 
-# Jupyter
-.ipynb_checkpoints/reorganize.bat 
+# --- Jupyter ---
+.ipynb_checkpoints/
