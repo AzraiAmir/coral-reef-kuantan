@@ -42,6 +42,9 @@ Phases A, B, and C were committed before this convention was finalized. Their hi
 
 | 6e71350 | Housekeeping: organise phase scripts into scripts/phase\_X/ + clean .gitignore | A, B, C | Retroactive consolidation: split flat `scripts/` into `scripts/phase\_a/`, `scripts/phase\_b/`, `scripts/phase\_c/` and consolidated `.gitignore` for all three phases |
 
+| b98d4bb | Housekeeping: add scripts/resume.bat + scripts/run_phase_d_flowB.bat | D | Phase D housekeeping (resume script + flow B runner) |
+| 3de2d3b | Add Phase D: health assessment flow B (relative colour analysis + D_to_White) | D | Phase D Flow B code (263 colonies analysed) |
+
 
 
 \## Rationale
