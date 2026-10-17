@@ -1,34 +1,40 @@
-﻿# Phase A outputs
-data
-acquisition_logs
+﻿# ===== Phase A outputs =====
+data/
+acquisition_logs/
 coral_metadata.db
 
-# Phase B outputs
-results
+# ===== Phase B outputs =====
+results/
 
-# Phase C outputs
-runs
-
-# Model weights
-models
+# ===== Phase C outputs =====
+runs/
+models/
 *.pt
 *.pth
 *.onnx
 
-# Python
-__pycache__
-*.pyc
-*.egg-info
-.ipynb_checkpoints
-.venv
-venv
+# ===== Phase E outputs =====
+results/phase_e/
+data/external/mike/
+*.mesh
+*.dfs2
+*.nc
+*.m21fm
 
-# OS
+# ===== Python =====
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ===== OS =====
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDE
-.vscode
-.idea
+# ===== IDE =====
+.vscode/
+.idea/
 *.swp
