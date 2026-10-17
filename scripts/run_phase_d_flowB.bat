@@ -5,7 +5,7 @@ call "%~dp0resume.bat"
 
 REM 2. Force working directory and PYTHONPATH (absolute, not relative)
 cd /d "C:\Users\mazra\Downloads\coral-reef-kuantan"
-set PYTHONPATH=C:\Users\mazra\Downloads\coral-reef-kuantan\src;%PYTHONPATH%
+if not defined PYTHONPATH set PYTHONPATH=C:\Users\mazra\Downloads\coral-reef-kuantan\src
 
 echo.
 echo === Phase D Flow B — full pipeline ===

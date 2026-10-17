@@ -28,7 +28,7 @@ REM --- 2. Navigate to project root ---
 cd /d "C:\Users\mazra\Downloads\coral-reef-kuantan"
 
 REM Add src to PYTHONPATH so scripts can find the azrai library
-set PYTHONPATH=%CD%\src;%PYTHONPATH%
+if not defined PYTHONPATH set PYTHONPATH=%CD%\src
 
 REM --- 3. Confirm ready state ---
 echo === Session ready ===

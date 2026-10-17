@@ -46,7 +46,6 @@ Phases A, B, and C were committed before this convention was finalized. Their hi
 | 3de2d3b | Add Phase D: health assessment flow B (relative colour analysis + D_to_White) | D | Phase D Flow B code (263 colonies analysed) |
 
 
-
 \## Rationale
 
 
