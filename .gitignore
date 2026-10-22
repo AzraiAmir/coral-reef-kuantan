@@ -50,3 +50,11 @@ models/
 *.tif
 venv/
 .env
+
+# Phase F / G additions
+__pycache__/
+*.pyc
+*.mp4
+*.avi
+*.mov
+.ipynb_checkpoints/

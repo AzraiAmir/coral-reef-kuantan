@@ -2,7 +2,11 @@ import streamlit as st
 from pathlib import Path
 import base64
 
-st.set_page_config(page_title="Azr.AI | Coral Health", page_icon="🪸", layout="wide")
+st.set_page_config(
+    page_title="Azr.AI | Coral Health", 
+    page_icon="dashboard/assets/favicon.png",
+    layout="wide"
+)
 
 # 1. LOAD CSS
 css_path = Path(__file__).parent / "assets" / "style.css"
@@ -32,6 +36,87 @@ st.markdown("""
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
+
+    /* ==========================================
+       FLOATING SCROLL BUTTON (Global CSS)
+       ========================================== */
+    .floating-scroll-btn {
+        position: fixed !important;
+        bottom: 40px !important;
+        right: 40px !important;
+        width: 55px !important;
+        height: 55px !important;
+        border-radius: 50% !important;
+        background-color: #1E293B !important;
+        color: #00E5FF !important;
+        border: 2px solid #334155 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+        text-decoration: none !important;
+        z-index: 9999999 !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .floating-scroll-btn:hover {
+        border-color: #00E5FF !important;
+        color: #FFFFFF !important;
+        transform: scale(1.1) !important;
+    }
+    /* Force the Streamlit iframe to float */
+    iframe[title="streamlit_component"] {
+        position: fixed !important;
+        bottom: 40px !important;
+        right: 40px !important;
+        width: 60px !important;
+        height: 60px !important;
+        z-index: 999999 !important;
+        border: none !important;
+        box-shadow: none !important;
+        pointer-events: none;
+    }
+    iframe[title="streamlit_component"] * {
+        pointer-events: auto;
+    }
+    /* 
+       Target the Streamlit link button specifically. 
+       We find the exact link (#top-anchor) and force it to float.
+    */
+    div[data-testid="stVerticalBlock"] div:has(> div[data-testid="stMarkdownContainer"] a[href="#top-anchor"]) {
+        position: fixed !important;
+        bottom: 40px !important;
+        right: 40px !important;
+        z-index: 9999999 !important;
+        width: 55px !important;
+    }
+
+    /* Style the actual link button to be a circular icon */
+    a[href="#top-anchor"] {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 55px !important;
+        height: 55px !important;
+        border-radius: 50% !important;
+        background-color: #1E293B !important;
+        color: #00E5FF !important;
+        border: 2px solid #334155 !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+        transition: all 0.3s ease !important;
+        padding: 0 !important;
+    }
+
+    a[href="#top-anchor"]:hover {
+        border-color: #00E5FF !important;
+        color: #FFFFFF !important;
+        transform: scale(1.1) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -45,6 +130,7 @@ pg = st.navigation([
     st.Page("page_connectivity.py", title="Connectivity", icon="🕸️"),
     st.Page("page_temporal.py", title="Temporal Trends", icon="📈"),
     st.Page("page_export.py", title="Data Export", icon="💾"),
+    st.Page("page_faq.py", title="FAQ", icon="❓"),
     st.Page("page_contact.py", title="Contact Us", icon="✉️"),
 ], position="hidden")
 
@@ -93,6 +179,10 @@ with st.sidebar:
         <a href="/page_export" target="_self" class="{get_class('Data Export')}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             <span>Data Export</span>
+        </a>
+        <a href="/page_faq" target="_self" class="{get_class('FAQ')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>FAQ</span>
         </a>
         <a href="/page_contact" target="_self" class="{get_class('Contact Us')}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
