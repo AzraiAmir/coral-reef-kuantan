@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-dark: #0B1117;
+    --bg-panel: #111A22;
+    --accent-cyan: #00E5FF;
+    --text-main: #E2E8F0;
+    --border-color: #1E293B;
+    --border-reef: #1E3A5F;
+}
+
+/* PAGE BACKGROUND */
+.stApp {
+    background-color: var(--bg-dark);
+    background-image: 
+        linear-gradient(rgba(30, 58, 95, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 58, 95, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Typography */
+h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
+.module-header { font-family: 'Space Mono', monospace; color: var(--accent-cyan); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+.panel { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 4px; padding: 20px; margin-bottom: 20px; }
+.panel-title { font-family: 'Space Mono', monospace; color: var(--accent-cyan); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+
+/* Card Fixes */
+[data-testid="stVerticalBlockBorderWrapper"] { background-color: var(--bg-panel) !important; border: 1px solid var(--border-color) !important; border-radius: 6px; padding: 0px !important; }
+[data-testid="stVerticalBlockBorderWrapper"] > div { background-color: var(--bg-panel) !important; }
+
+/* Sidebar Base */
+[data-testid="stSidebar"] { 
+    background-color: var(--bg-panel) !important; 
+    border-right: 1px solid var(--border-color); 
+}
+[data-testid="stSidebarCollapseButton"] { display: none !important; }
+
+/* Navigation */
+.nav-container { display: flex; flex-direction: column; gap: 5px; padding: 0 10px; }
+.nav-link { display: flex; align-items: center; padding: 10px 15px; border-radius: 6px; text-decoration: none !important; color: #B0BEC5 !important; font-family: 'Inter', sans-serif; font-size: 0.95rem; transition: all 0.2s ease; }
+.nav-link:hover { background-color: #1E3A5F; color: #F5F7FA !important; }
+.nav-link svg { width: 18px; height: 18px; margin-right: 12px; stroke: currentColor; }
+.nav-link.active { background-color: #1E3A5F; color: #F5F7FA !important; font-weight: 600; }
+
+/* Space at the bottom so menu items don't hide behind the footer */
+[data-testid="stSidebarUserContent"] {
+    padding-bottom: 140px !important; 
+}
+
+/* THE FOOTER FIX */
+.floating-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 275px;
+    background-color: var(--bg-panel);
+    z-index: 99999;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 15px;
+    /* REMOVED border-right to kill the vertical line */
+}
+
+.floating-footer img {
+    width: 110px;
+    margin-bottom: 10px;
+}
+
+.floating-footer hr {
+    border: none;
+    border-top: 1px solid var(--border-reef);
+    width: 80%;
+    margin: 5px auto 10px auto;
+}
+
+.floating-footer p {
+    color: #64748B !important;
+    font-size: 0.75rem !important;
+    font-family: 'Space Mono', monospace !important;
+    margin: 0 !important;
+}
