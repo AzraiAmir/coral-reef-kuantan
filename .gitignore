@@ -38,3 +38,15 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Phase F: Dashboard & Assets
+dashboard/assets/*.JPG
+dashboard/assets/*.jpg
+dashboard/assets/*.jpeg
+data/
+models/
+*.pt
+*.nc
+*.tif
+venv/
+.env

@@ -4,10 +4,38 @@ import base64
 
 st.set_page_config(page_title="Azr.AI | Coral Health", page_icon="🪸", layout="wide")
 
+# 1. LOAD CSS
 css_path = Path(__file__).parent / "assets" / "style.css"
 if css_path.exists():
     with open(css_path) as f: st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# 2. HIDE SCROLLBARS GLOBALLY & REDUCE PADDING
+st.markdown("""
+<style>
+    /* Reduce the massive default top padding */
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    /* Hide the sidebar scrollbar */
+    section[data-testid="stSidebar"] > div {
+        overflow-y: hidden !important;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    div[data-testid="stVerticalBlock"] > div[style*="height"]::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    div[data-testid="stVerticalBlock"] > div[style*="height"] {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# 3. NAVIGATION
 pg = st.navigation([
     st.Page("page_overview.py", title="Overview", icon="🏠", default=True),
     st.Page("page_upload.py", title="Upload & Process", icon="📤"),
@@ -22,6 +50,7 @@ pg = st.navigation([
 
 current_page = pg.title
 
+# 4. SIDEBAR
 with st.sidebar:
     logo_path = Path(__file__).parent / "assets" / "logo_full.png"
     if logo_path.exists():
@@ -72,42 +101,52 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # --- THE FOOTER ---
+    # --- FOOTER ---
     iium_logo_path = Path(__file__).parent / "assets" / "iium_logo.png"
     if iium_logo_path.exists():
         with open(iium_logo_path, "rb") as f: 
             iium_b64 = base64.b64encode(f.read()).decode()
 
-             st.markdown(f"""
-     <div class="floating-footer" style="text-align: center;">
-         <img src="data:image/png;base64,{iium_b64}">
-         <hr style="margin: 10px 0;">
-         <p style="margin: 0; font-size: 12px; color: #E2E8F0;">v1.0.0 | PhD Research</p>
-         <p style="margin: 5px 0 0 0; font-size: 10px; color: #64748B; line-height: 1.2;">
-             © 2026 M. Azrai Amir.<br>All Rights Reserved.
-         </p>
-     </div>
-     """, unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="floating-footer" style="text-align: center;">
+            <img src="data:image/png;base64,{iium_b64}">
+            <hr style="width: 80%; margin: 10px auto; border-color: #334155;">
+            <p style="margin: 0; font-size: 12px; color: #E2E8F0;">v1.0.0 | PhD Research</p>
+            <p style="margin: 5px 0 0 0; font-size: 10px; color: #64748B; line-height: 1.2;">
+                © 2026 M. Azrai Amir.<br>All Rights Reserved.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.error("IIUM Logo not found.")
 
-# --- TOP HEADER ---
-st.markdown("""
-<div style="
-    padding: 10px 0px 20px 0px; 
-    border-bottom: 1px solid #1E293B; 
-    margin-bottom: 20px;
-">
-    <h1 style="
-        color: #E2E8F0; 
-        font-family: 'Space Mono', monospace; 
-        font-size: 1.2rem; 
-        letter-spacing: 1px; 
-        margin: 0;
-    ">
+# 5. TOP HEADER
+acri_path = Path(__file__).parent / "assets" / "acri_logo.png"
+marine_path = Path(__file__).parent / "assets" / "marine_ai_logo.png"
+
+acri_b64 = ""
+marine_b64 = ""
+
+if acri_path.exists():
+    with open(acri_path, "rb") as f: 
+        acri_b64 = base64.b64encode(f.read()).decode()
+if marine_path.exists():
+    with open(marine_path, "rb") as f: 
+        marine_b64 = base64.b64encode(f.read()).decode()
+
+header_html = """
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0px 20px 0px; border-bottom: 1px solid #1E293B; margin-bottom: 20px;">
+    <h1 style="color: #E2E8F0; font-family: 'Space Mono', monospace; font-size: 1.2rem; letter-spacing: 1px; margin: 0; white-space: nowrap;">
         <span style="color: #00E5FF;">AZR.AI</span> | Automated Zonation & Reef Artificial Intelligence
     </h1>
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <img src="data:image/png;base64,{ACRI_IMG}" style="height: 80px; object-fit: contain;">
+        <img src="data:image/png;base64,{MARINE_IMG}" style="height: 80px; object-fit: contain;">
+    </div>
 </div>
-""", unsafe_allow_html=True)
+""".format(ACRI_IMG=acri_b64, MARINE_IMG=marine_b64)
 
+st.markdown(header_html, unsafe_allow_html=True)
+
+# 6. RUN THE PAGE
 pg.run()

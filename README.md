@@ -136,3 +136,22 @@ pip install meshkernel xugrid
 
 pip install -e .
 
+
+# Azr.AI | Automated Zonation & Reef Artificial Intelligence
+
+An integrated framework for Coral Species Detection, Health Assessment, and Connectivity Modelling in Kuantan Coastal Waters.
+
+## About the Project
+This repository contains the complete backend pipelines (Phases A-E) and the Streamlit visualization dashboard (Phase F) for PhD research conducted at the International Islamic University Malaysia (IIUM). 
+
+## Features
+* **Health Assessment:** Deep learning-based detection and colour-reference algorithms to quantify bleaching severity (KBI).
+* **Connectivity Modelling:** Lagrangian particle tracking to map source-sink larval dispersal dynamics.
+* **Distribution Maps:** Spatial visualization of geo-referenced reef sites.
+* **Interactive Dashboard:** A dark-mode terminal-style Streamlit app to explore KPIs, download charts, and view network graphs.
+
+## How to Run Locally
+1. Clone this repository.
+2. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
