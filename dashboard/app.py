@@ -1,19 +1,21 @@
 import streamlit as st
 from pathlib import Path
 import base64
+import streamlit.components.v1 as components
 
+# 1. SET PAGE CONFIG (Using your custom favicon.png)
 st.set_page_config(
     page_title="Azr.AI | Coral Health", 
-    page_icon="dashboard/assets/favicon.png",
+    page_icon="dashboard/assets/favicon.png", 
     layout="wide"
 )
 
-# 1. LOAD CSS
+# 2. LOAD CSS
 css_path = Path(__file__).parent / "assets" / "style.css"
 if css_path.exists():
     with open(css_path) as f: st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# 2. HIDE SCROLLBARS GLOBALLY & REDUCE PADDING
+# 3. HIDE SCROLLBARS GLOBALLY & REDUCE PADDING
 st.markdown("""
 <style>
     /* Reduce the massive default top padding */
@@ -22,6 +24,11 @@ st.markdown("""
         padding-bottom: 1rem !important;
     }
     
+    /* Force the sidebar top padding to be smaller */
+    section[data-testid="stSidebar"] > div:first-child {
+        padding-top: 1rem !important;
+    }
+
     /* Hide the sidebar scrollbar */
     section[data-testid="stSidebar"] > div {
         overflow-y: hidden !important;
@@ -36,91 +43,10 @@ st.markdown("""
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
-
-    /* ==========================================
-       FLOATING SCROLL BUTTON (Global CSS)
-       ========================================== */
-    .floating-scroll-btn {
-        position: fixed !important;
-        bottom: 40px !important;
-        right: 40px !important;
-        width: 55px !important;
-        height: 55px !important;
-        border-radius: 50% !important;
-        background-color: #1E293B !important;
-        color: #00E5FF !important;
-        border: 2px solid #334155 !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        font-size: 24px !important;
-        font-weight: bold !important;
-        text-decoration: none !important;
-        z-index: 9999999 !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .floating-scroll-btn:hover {
-        border-color: #00E5FF !important;
-        color: #FFFFFF !important;
-        transform: scale(1.1) !important;
-    }
-    /* Force the Streamlit iframe to float */
-    iframe[title="streamlit_component"] {
-        position: fixed !important;
-        bottom: 40px !important;
-        right: 40px !important;
-        width: 60px !important;
-        height: 60px !important;
-        z-index: 999999 !important;
-        border: none !important;
-        box-shadow: none !important;
-        pointer-events: none;
-    }
-    iframe[title="streamlit_component"] * {
-        pointer-events: auto;
-    }
-    /* 
-       Target the Streamlit link button specifically. 
-       We find the exact link (#top-anchor) and force it to float.
-    */
-    div[data-testid="stVerticalBlock"] div:has(> div[data-testid="stMarkdownContainer"] a[href="#top-anchor"]) {
-        position: fixed !important;
-        bottom: 40px !important;
-        right: 40px !important;
-        z-index: 9999999 !important;
-        width: 55px !important;
-    }
-
-    /* Style the actual link button to be a circular icon */
-    a[href="#top-anchor"] {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 55px !important;
-        height: 55px !important;
-        border-radius: 50% !important;
-        background-color: #1E293B !important;
-        color: #00E5FF !important;
-        border: 2px solid #334155 !important;
-        font-size: 24px !important;
-        font-weight: bold !important;
-        text-decoration: none !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
-        transition: all 0.3s ease !important;
-        padding: 0 !important;
-    }
-
-    a[href="#top-anchor"]:hover {
-        border-color: #00E5FF !important;
-        color: #FFFFFF !important;
-        transform: scale(1.1) !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. NAVIGATION
+# 4. NAVIGATION
 pg = st.navigation([
     st.Page("page_overview.py", title="Overview", icon="🏠", default=True),
     st.Page("page_upload.py", title="Upload & Process", icon="📤"),
@@ -136,12 +62,12 @@ pg = st.navigation([
 
 current_page = pg.title
 
-# 4. SIDEBAR
+# 5. SIDEBAR
 with st.sidebar:
     logo_path = Path(__file__).parent / "assets" / "logo_full.png"
     if logo_path.exists():
         with open(logo_path, "rb") as f: logo_b64 = base64.b64encode(f.read()).decode()
-        st.markdown(f'<div style="text-align: center; margin-bottom: 30px;"><img src="data:image/png;base64,{logo_b64}" style="width: 140px;"></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="text-align: center; margin-top: -20px; margin-bottom: 20px;"><img src="data:image/png;base64,{logo_b64}" style="width: 140px;"></div>', unsafe_allow_html=True)
     
     def get_class(title):
         return "nav-link active" if current_page == title else "nav-link"
@@ -192,30 +118,24 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     # --- FOOTER ---
-    iium_logo_path = Path(__file__).parent / "assets" / "iium_logo.png"
-    if iium_logo_path.exists():
-        with open(iium_logo_path, "rb") as f: 
-            iium_b64 = base64.b64encode(f.read()).decode()
+    st.markdown("""
+    <div class="floating-footer" style="text-align: center;">
+        <hr style="width: 80%; margin: 10px auto; border-color: #334155;">
+        <p style="margin: 0; font-size: 12px; color: #E2E8F0;">v1.0.0 | PhD Research</p>
+        <p style="margin: 5px 0 0 0; font-size: 10px; color: #64748B; line-height: 1.2;">
+            © 2026 M. Azrai Amir.<br>All Rights Reserved.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.markdown(f"""
-        <div class="floating-footer" style="text-align: center;">
-            <img src="data:image/png;base64,{iium_b64}">
-            <hr style="width: 80%; margin: 10px auto; border-color: #334155;">
-            <p style="margin: 0; font-size: 12px; color: #E2E8F0;">v1.0.0 | PhD Research</p>
-            <p style="margin: 5px 0 0 0; font-size: 10px; color: #64748B; line-height: 1.2;">
-                © 2026 M. Azrai Amir.<br>All Rights Reserved.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.error("IIUM Logo not found.")
-
-# 5. TOP HEADER
+# 6. TOP HEADER & LOGO CLUSTER
 acri_path = Path(__file__).parent / "assets" / "acri_logo.png"
 marine_path = Path(__file__).parent / "assets" / "marine_ai_logo.png"
+iium_path = Path(__file__).parent / "assets" / "iium_logo.png"
 
 acri_b64 = ""
 marine_b64 = ""
+iium_b64 = ""
 
 if acri_path.exists():
     with open(acri_path, "rb") as f: 
@@ -223,20 +143,42 @@ if acri_path.exists():
 if marine_path.exists():
     with open(marine_path, "rb") as f: 
         marine_b64 = base64.b64encode(f.read()).decode()
+if iium_path.exists():
+    with open(iium_path, "rb") as f: 
+        iium_b64 = base64.b64encode(f.read()).decode()
 
-header_html = """
-<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0px 20px 0px; border-bottom: 1px solid #1E293B; margin-bottom: 20px;">
-    <h1 style="color: #E2E8F0; font-family: 'Space Mono', monospace; font-size: 1.2rem; letter-spacing: 1px; margin: 0; white-space: nowrap;">
+# Spacer at the very top
+st.markdown('<div style="margin-top: 30px;"></div>', unsafe_allow_html=True)
+
+# Split the header into two columns
+col_title, col_logos = st.columns([2, 1], vertical_alignment="center")
+
+with col_title:
+    st.markdown("""
+    <h1 style="color: #E2E8F0; font-family: 'Space Mono', monospace; font-size: 1.3rem; letter-spacing: 1px; margin: 0; padding-bottom: 20px; line-height: 1.4;">
         <span style="color: #00E5FF;">AZR.AI</span> | Automated Zonation & Reef Artificial Intelligence
     </h1>
-    <div style="display: flex; gap: 15px; align-items: center;">
-        <img src="data:image/png;base64,{ACRI_IMG}" style="height: 80px; object-fit: contain;">
-        <img src="data:image/png;base64,{MARINE_IMG}" style="height: 80px; object-fit: contain;">
-    </div>
-</div>
-""".format(ACRI_IMG=acri_b64, MARINE_IMG=marine_b64)
+    """, unsafe_allow_html=True)
 
-st.markdown(header_html, unsafe_allow_html=True)
+with col_logos:
+    components.html(
+        f"""
+        <div style="display: flex; justify-content: flex-end; align-items: center; padding-bottom: 20px;">
+            <div style="display: flex; align-items: center; background-color: #F1F5F9; padding: 8px 20px; border-radius: 12px; border: 1px solid #CBD5E1; gap: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <img src="data:image/png;base64,{iium_b64}" style="height: 60px; object-fit: contain;">
+                <div style="width: 1px; height: 40px; background-color: #94A3B8;"></div>
+                <img src="data:image/png;base64,{acri_b64}" style="height: 60px; object-fit: contain;">
+                <div style="width: 1px; height: 40px; background-color: #94A3B8;"></div>
+                <img src="data:image/png;base64,{marine_b64}" style="height: 60px; object-fit: contain;">
+            </div>
+        </div>
+        """,
+        height=100,
+        width=None 
+    )
 
-# 6. RUN THE PAGE
+# Bottom separator
+st.markdown('<div style="border-bottom: 1px solid #1E293B; margin-bottom: 20px;"></div>', unsafe_allow_html=True)
+
+# 7. RUN THE PAGE
 pg.run()
