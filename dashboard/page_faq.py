@@ -5,7 +5,7 @@ st.title("Frequently Asked Questions")
 st.markdown("Find answers to common questions regarding the Azr.AI system, model capabilities, and dashboard features.")
 
 # ==========================================
-# FAQ CARD CSS
+# CUSTOM CSS FOR FAQ CARDS
 # ==========================================
 st.markdown("""
 <style>
@@ -53,7 +53,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Helper function to create the HTML cards
 def faq_card(question, answer):
     st.markdown(f"""
     <details>
@@ -65,36 +64,102 @@ def faq_card(question, answer):
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ==========================================
-# SECTION 1: AI MODEL & DETECTION
+# SECTION 1: THE PIPELINE & PHASES
 # ==========================================
-st.markdown("### <span style='color:#00E5FF'>◈ AI Model & Detection</span>", unsafe_allow_html=True)
+st.markdown("### <span style='color:#00E5FF'>◈ The Pipeline & Phases</span>", unsafe_allow_html=True)
 
-faq_card("What species can the model currently detect?", "The current trained model is capable of detecting <b>Dipsastraea</b> and <b>Porites</b>. If the system is shown an untrained species (e.g., Montipora), it will likely either ignore it or misclassify it.")
-faq_card("Do I need to retrain the model if I want to detect new species?", "<b>Yes.</b> The system cannot learn new species on the fly. To detect a new coral species, a new dataset must be annotated and the model must be retrained.")
-faq_card("Can I upload videos instead of images?", "<b>Yes.</b> The system accepts both images (JPG, PNG) and videos (MP4, MOV). For videos, the system extracts frames at a specified interval to perform the analysis without overwhelming your computer's memory.")
+faq_card(
+    "What are the phases processed in this pipeline?",
+    "<b>Phase B (Enhancement)</b>, <b>Phase C (Detection)</b>, and <b>Phase D (Health Assessment)</b>.<br><br>"
+    "<ul>"
+    "<li><b>Phase B</b> restores underwater colors (RCC/CLAHE) to improve visibility.</li>"
+    "<li><b>Phase C</b> runs the YOLOv8 AI model to find and count the corals.</li>"
+    "<li><b>Phase D</b> crops each coral to calculate its Bleaching Index (KBI) and color distance to white (D_to_White).</li>"
+    "<li><b>Phase F (Dashboard)</b> immediately updates the charts and database with the new results.</li>"
+    "</ul>"
+)
+
+faq_card(
+    "Does the Upload page run all phases from A to F?",
+    "<b>No.</b> The dashboard only runs the computational phases (B, C, D) on uploaded media. It does <b>not</b> run Phase A (field data collection) or Phase E (ocean current simulation), as those require manual fieldwork and heavy hydrodynamic modelling (MIKE 21) done offline."
+)
+
+faq_card(
+    "What species can the AI model currently detect?",
+    "The current trained model is capable of detecting <b>Dipsastraea</b> and <b>Porites</b>. If the system is shown an untrained species (e.g., Montipora), it will likely either ignore it or misclassify it."
+)
+
+faq_card(
+    "Do I need to retrain the model if I want to detect new species?",
+    "<b>Yes.</b> The system cannot learn new species on the fly. To detect a new coral species, a new dataset must be annotated and the model must be retrained using the YOLOv8 architecture."
+)
 
 # ==========================================
 # SECTION 2: DATA & UPLOADS
 # ==========================================
 st.markdown("### <span style='color:#FFB74D'>◈ Data & Uploads</span>", unsafe_allow_html=True)
 
-faq_card("Do I need to rename my files to a specific format before uploading?", "<b>No.</b> You can upload images with any filename (e.g., IMG_2026.jpg). The system analyzes the visual content of the image, not the filename.")
-faq_card("Is there a limit to the file size or resolution I can upload?", "<b>Yes.</b> To prevent the server from crashing, the system limits individual files to <b>50 MB</b>. For videos, we recommend 1080p resolution rather than 4K.")
-faq_card("Does the system automatically assess coral health (KBI) when I upload?", "No, the Upload page is designed solely for fast detection. The health assessment requires a specific color-reference workflow, which can be viewed on the <b>Health Assessment</b> page.")
+faq_card(
+    "Do I need to rename my files to a specific format before uploading?",
+    "<b>No.</b> You can upload images with any filename (e.g., IMG_2026.jpg). The system analyzes the visual content of the image, not the filename."
+)
+
+faq_card(
+    "Is there a limit to the file size or resolution I can upload?",
+    "<b>Yes.</b> To prevent the server from crashing, the system limits individual files to <b>50 MB</b>. For videos, we recommend 1080p resolution rather than 4K to ensure smooth processing."
+)
+
+faq_card(
+    "Can I upload videos instead of images?",
+    "<b>Yes.</b> The system accepts both images (JPG, PNG) and videos (MP4, MOV). For videos, the system extracts frames at a specified interval (e.g., every 2 seconds) to perform the analysis without overwhelming your computer's memory."
+)
+
+faq_card(
+    "Why is my site name required?",
+    "The site name is used as the primary key in the database. It is required so the system can group the detections, calculate the average KBI per location, and plot it correctly on the Map and Overview pages."
+)
 
 # ==========================================
 # SECTION 3: DASHBOARD & VISUALIZATION
 # ==========================================
 st.markdown("### <span style='color:#AB47BC'>◈ Dashboard & Visualization</span>", unsafe_allow_html=True)
 
-faq_card("Why do some charts show simulated or limited data?", "The dashboard is continuously updated as new field data becomes available. Currently, the <b>Environment</b> and <b>Temporal Trends</b> charts display simulated data while the project awaits additional campaign data.")
-faq_card("What does the Dispersal Potential Index (DPI) mean?", "The DPI measures how important a specific reef is as a 'source' of coral larvae. A high DPI indicates that a reef exports a large number of larvae to nearby reefs, making it a critical area for conservation.")
-faq_card("How do I download the charts and data?", "Look for the <b>⚙ gear icon</b> in the top right corner of most charts. Clicking it opens a menu that allows you to download the chart as an image (PNG) or the underlying data as a spreadsheet (CSV).")
+faq_card(
+    "Why do some charts show simulated or limited data?",
+    "The <b>Environment</b> and <b>Temporal Trends</b> charts currently use simulated data while the project awaits additional campaign data (Phase A) and oceanographic satellite files (MODIS/NOAA)."
+)
+
+faq_card(
+    "Why does the Connectivity page not update after I upload images?",
+    "Connectivity (Phase E) is based on ocean physics (currents and tides), not coral images. It requires running the MIKE 21 hydrodynamic simulation offline. Uploading an image does not change the ocean currents."
+)
+
+faq_card(
+    "What does the Dispersal Potential Index (DPI) mean?",
+    "The DPI measures how important a specific reef is as a 'source' of coral larvae. A high DPI indicates that a reef exports a large number of larvae to nearby reefs, making it a critical area for conservation."
+)
+
+faq_card(
+    "How do I download the charts and data?",
+    "Look for the <b>⚙ gear icon</b> in the top right corner of most charts. Clicking it opens a menu that allows you to download the chart as an image (PNG) or the underlying data as a spreadsheet (CSV)."
+)
 
 # ==========================================
 # SECTION 4: TROUBLESHOOTING
 # ==========================================
 st.markdown("### <span style='color:#E57373'>◈ Troubleshooting</span>", unsafe_allow_html=True)
 
-faq_card("The detection model is not loading. What should I do?", "If the system cannot load the AI model, ensure that the model file has been properly placed in the <code>models/trained/</code> directory. If the issue persists, try refreshing the page.")
-faq_card("The map is blank or grey. How do I fix it?", "The interactive map requires an active internet connection to load the background map tiles. If you are offline or behind a strict firewall, the map may appear as a blank grey box.")
+faq_card(
+    "I uploaded images, but the KBI chart shows a blank space for my new site.",
+    "This happens if you uploaded a site that already exists in the database but had empty (NaN) data. To fix this, ensure your <code>site_summary.csv</code> has '0' instead of blank spaces, or clear the file and re-upload."
+)
+
+faq_card(
+    "The detection model is not loading. What should I do?",
+    "Ensure that the model file <code>best.pt</code> has been properly placed in the <code>models/trained/yolov8s_coral/</code> directory."
+)
+
+faq_card(
+    "The map is blank or grey. How do I fix it?",
+    "The interactive map requires an active internet connection to load the background map tiles. If you are offline or behind a strict firewall, the map may appear as a blank grey box."
+)

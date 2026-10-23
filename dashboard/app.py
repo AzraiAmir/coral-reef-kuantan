@@ -3,7 +3,7 @@ from pathlib import Path
 import base64
 import streamlit.components.v1 as components
 
-# 1. SET PAGE CONFIG (Using your custom favicon.png)
+# 1. SET PAGE CONFIG
 st.set_page_config(
     page_title="Azr.AI | Coral Health", 
     page_icon="dashboard/assets/favicon.png", 
@@ -18,30 +18,22 @@ if css_path.exists():
 # 3. HIDE SCROLLBARS GLOBALLY & REDUCE PADDING
 st.markdown("""
 <style>
-    /* Reduce the massive default top padding */
     .block-container {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
-    
-    /* Force the sidebar top padding to be smaller */
     section[data-testid="stSidebar"] > div:first-child {
         padding-top: 1rem !important;
     }
-
-    /* Hide the sidebar scrollbar */
     section[data-testid="stSidebar"] > div {
         overflow-y: hidden !important;
     }
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
     div[data-testid="stVerticalBlock"] > div[style*="height"]::-webkit-scrollbar {
         display: none;
     }
-    /* Hide scrollbar for IE, Edge and Firefox */
     div[data-testid="stVerticalBlock"] > div[style*="height"] {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -138,19 +130,14 @@ marine_b64 = ""
 iium_b64 = ""
 
 if acri_path.exists():
-    with open(acri_path, "rb") as f: 
-        acri_b64 = base64.b64encode(f.read()).decode()
+    with open(acri_path, "rb") as f: acri_b64 = base64.b64encode(f.read()).decode()
 if marine_path.exists():
-    with open(marine_path, "rb") as f: 
-        marine_b64 = base64.b64encode(f.read()).decode()
+    with open(marine_path, "rb") as f: marine_b64 = base64.b64encode(f.read()).decode()
 if iium_path.exists():
-    with open(iium_path, "rb") as f: 
-        iium_b64 = base64.b64encode(f.read()).decode()
+    with open(iium_path, "rb") as f: iium_b64 = base64.b64encode(f.read()).decode()
 
-# Spacer at the very top
 st.markdown('<div style="margin-top: 30px;"></div>', unsafe_allow_html=True)
 
-# Split the header into two columns
 col_title, col_logos = st.columns([2, 1], vertical_alignment="center")
 
 with col_title:
@@ -177,7 +164,6 @@ with col_logos:
         width=None 
     )
 
-# Bottom separator
 st.markdown('<div style="border-bottom: 1px solid #1E293B; margin-bottom: 20px;"></div>', unsafe_allow_html=True)
 
 # 7. RUN THE PAGE
