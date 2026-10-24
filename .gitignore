@@ -51,7 +51,6 @@ models/
 venv/
 .env
 
-# Phase F / G additions
 __pycache__/
 *.pyc
 *.mp4
