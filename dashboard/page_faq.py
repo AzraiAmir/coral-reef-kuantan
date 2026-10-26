@@ -26,9 +26,7 @@ st.markdown("""
         display: flex;
         align-items: center;
     }
-    summary::-webkit-details-marker {
-        display: none;
-    }
+    summary::-webkit-details-marker { display: none; }
     summary::before {
         content: "›";
         color: #E2E8F0;
@@ -38,9 +36,7 @@ st.markdown("""
         transition: transform 0.2s ease;
         line-height: 1;
     }
-    details[open] summary::before {
-        transform: rotate(90deg);
-    }
+    details[open] summary::before { transform: rotate(90deg); }
     .faq-answer {
         font-size: 1.05rem;
         color: #94A3B8;
@@ -64,18 +60,28 @@ def faq_card(question, answer):
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ==========================================
-# SECTION 1: THE PIPELINE & PHASES
+# SECTION 0: ABOUT THE DASHBOARD
 # ==========================================
-st.markdown("### <span style='color:#00E5FF'>◈ The Pipeline & Phases</span>", unsafe_allow_html=True)
+st.markdown("### <span style='color:#00E5FF'>◈ About the System</span>", unsafe_allow_html=True)
+
+faq_card(
+    "What is this dashboard about?", 
+    "This dashboard is the frontend interface for the <b>Azr.AI Coral Health Monitoring System</b>. It integrates deep learning (YOLOv8), colour analysis, and hydrodynamic modelling to monitor coral reef health in Kuantan. You can upload raw underwater imagery/video to detect species, calculate bleaching severity (KBI), and visualise spatial and connectivity data."
+)
 
 faq_card(
     "What are the phases processed in this pipeline?",
     "<b>Phase B (Enhancement)</b>, <b>Phase C (Detection)</b>, and <b>Phase D (Health Assessment)</b>.<br><br>"
     "<ul>"
-    "<li><b>Phase B</b> restores underwater colors (RCC/CLAHE) to improve visibility.</li>"
-    "<li><b>Phase C</b> runs the YOLOv8 AI model to find and count the corals.</li>"
-    "<li><b>Phase D</b> crops each coral to calculate its Bleaching Index (KBI) and color distance to white (D_to_White).</li>"
-    "<li><b>Phase F (Dashboard)</b> immediately updates the charts and database with the new results.</li>"
+    "<li><b>Phase B (Enhancement):</b> Restores underwater colors and contrast before detection using three algorithms:"
+    "<ul>"
+    "<li><b>RCC (Red Channel Compensation):</b> Restores the red light that is lost underwater due to depth.</li>"
+    "<li><b>Gray-World:</b> Neutralizes unnatural color casts (e.g., if the whole image looks too blue or green).</li>"
+    "<li><b>CLAHE (Contrast Limited Adaptive Histogram Equalization):</b> Boosts local contrast to make coral textures and edges pop.</li>"
+    "</ul></li>"
+    "<li><b>Phase C (Detection):</b> Runs the YOLOv8 AI model to find, count, and label the coral species.</li>"
+    "<li><b>Phase D (Health Assessment):</b> Crops each coral to calculate its Bleaching Index (KBI) and color distance to white (D_to_White).</li>"
+    "<li><b>Phase F (Dashboard):</b> Immediately updates the charts and database with the new results.</li>"
     "</ul>"
 )
 
@@ -84,24 +90,19 @@ faq_card(
     "<b>No.</b> The dashboard only runs the computational phases (B, C, D) on uploaded media. It does <b>not</b> run Phase A (field data collection) or Phase E (ocean current simulation), as those require manual fieldwork and heavy hydrodynamic modelling (MIKE 21) done offline."
 )
 
+# ==========================================
+# SECTION 1: DATA & UPLOADS
+# ==========================================
+st.markdown("### <span style='color:#FFB74D'>◈ Data & Uploads</span>", unsafe_allow_html=True)
+
 faq_card(
     "What species can the AI model currently detect?",
-    "The current trained model is capable of detecting <b>Dipsastraea</b> and <b>Porites</b>. If the system is shown an untrained species (e.g., Montipora), it will likely either ignore it or misclassify it."
+    "The AI model is a <b>dynamic classifier</b> that detects the coral genera present in its training dataset. Because it continuously learns from the annotated data it is given, the range of detectable species expands as new annotations are added to the system. However, if the system is shown a species that was not included in its training data, it will likely ignore it or misclassify it."
 )
 
 faq_card(
     "Do I need to retrain the model if I want to detect new species?",
     "<b>Yes.</b> The system cannot learn new species on the fly. To detect a new coral species, a new dataset must be annotated and the model must be retrained using the YOLOv8 architecture."
-)
-
-# ==========================================
-# SECTION 2: DATA & UPLOADS
-# ==========================================
-st.markdown("### <span style='color:#FFB74D'>◈ Data & Uploads</span>", unsafe_allow_html=True)
-
-faq_card(
-    "Do I need to rename my files to a specific format before uploading?",
-    "<b>No.</b> You can upload images with any filename (e.g., IMG_2026.jpg). The system analyzes the visual content of the image, not the filename."
 )
 
 faq_card(
@@ -114,13 +115,8 @@ faq_card(
     "<b>Yes.</b> The system accepts both images (JPG, PNG) and videos (MP4, MOV). For videos, the system extracts frames at a specified interval (e.g., every 2 seconds) to perform the analysis without overwhelming your computer's memory."
 )
 
-faq_card(
-    "Why is my site name required?",
-    "The site name is used as the primary key in the database. It is required so the system can group the detections, calculate the average KBI per location, and plot it correctly on the Map and Overview pages."
-)
-
 # ==========================================
-# SECTION 3: DASHBOARD & VISUALIZATION
+# SECTION 2: DASHBOARD & VISUALIZATION
 # ==========================================
 st.markdown("### <span style='color:#AB47BC'>◈ Dashboard & Visualization</span>", unsafe_allow_html=True)
 
@@ -145,7 +141,7 @@ faq_card(
 )
 
 # ==========================================
-# SECTION 4: TROUBLESHOOTING
+# SECTION 3: TROUBLESHOOTING
 # ==========================================
 st.markdown("### <span style='color:#E57373'>◈ Troubleshooting</span>", unsafe_allow_html=True)
 

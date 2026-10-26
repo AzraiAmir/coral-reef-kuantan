@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import networkx as nx
 import json
+import numpy as np
 from pathlib import Path
 from utils import chart_card
 
@@ -29,8 +30,7 @@ col1, col2 = st.columns([1.5, 1], vertical_alignment="top")
 
 # --- LEFT COLUMN: NETWORK GRAPH ---
 with col1:
-    # Keep height at 520
-    with st.container(border=True, height=520):
+    with st.container(border=True, height=560):
         if not df_matrix.empty:
             G = nx.DiGraph()
             sources = df_matrix.index.tolist()
@@ -54,47 +54,35 @@ with col1:
                 edge_x.extend([x0, x1, None])
                 edge_y.extend([y0, y1, None])
 
-            source_x, source_y, source_text = [], [], []
-            sink_x, sink_y, sink_text = [], [], []
-            
+            edge_trace = go.Scatter(x=edge_x, y=edge_y, line=dict(width=1.5, color='#64748B'), hoverinfo='none', mode='lines')
+
+            node_x, node_y, node_text, node_color = [], [], [], []
             for node in G.nodes():
                 x, y = pos[node]
+                node_x.append(x)
+                node_y.append(y)
+                
                 clean_name = node.replace("_", " ")
                 if " " in clean_name:
                     parts = clean_name.split(" ", 1)
                     display_text = f"<span style='text-align:center'>{parts[0]}<br>{parts[1]}</span>"
                 else:
                     display_text = f"<span style='text-align:center'>{clean_name}</span>"
-                
-                if node in sources:
-                    source_x.append(x)
-                    source_y.append(y)
-                    source_text.append(display_text)
-                else:
-                    sink_x.append(x)
-                    sink_y.append(y)
-                    sink_text.append(display_text)
+                    
+                node_text.append(display_text)
+                node_color.append('#00E5FF' if node in sources else '#FF7043')
 
-            edge_trace = go.Scatter(x=edge_x, y=edge_y, line=dict(width=1.5, color='#64748B'), hoverinfo='none', mode='lines', showlegend=False)
+            node_trace = go.Scatter(
+                x=node_x, y=node_y, mode='markers+text', text=node_text, textposition="bottom center",
+                textfont=dict(size=11, color='#E2E8F0'), hoverinfo='text',
+                marker=dict(showscale=False, color=node_color, size=20, line_width=2, line_color='#111A22'))
 
-            source_trace = go.Scatter(
-                x=source_x, y=source_y, mode='markers+text', text=source_text, textposition="bottom center",
-                textfont=dict(size=11, color='#E2E8F0'), hoverinfo='text', name='Source Reef (MPA)',
-                marker=dict(showscale=False, color='#00E5FF', size=20, line_width=2, line_color='#111A22'))
-
-            sink_trace = go.Scatter(
-                x=sink_x, y=sink_y, mode='markers+text', text=sink_text, textposition="bottom center",
-                textfont=dict(size=11, color='#E2E8F0'), hoverinfo='text', name='Sink Reef (Nearshore)',
-                marker=dict(showscale=False, color='#FF7043', size=20, line_width=2, line_color='#111A22'))
-
-            # THE FIX: Reduced bottom margin (b=10) and adjusted legend y-position
-            fig = go.Figure(data=[edge_trace, source_trace, sink_trace],
+            fig = go.Figure(data=[edge_trace, node_trace],
                             layout=go.Layout(
-                                showlegend=True, hovermode='closest', margin=dict(b=10, l=20, r=20, t=20), 
-                                legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5, font=dict(color='#E2E8F0', size=12)),
+                                showlegend=False, hovermode='closest', margin=dict(b=40, l=20, r=20, t=20), 
                                 xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[-1.3, 1.3]), 
                                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[-1.3, 1.3]), 
-                                paper_bgcolor='#111A22', plot_bgcolor='#111A22', font_color='#E2E8F0', height=440))
+                                paper_bgcolor='#111A22', plot_bgcolor='#111A22', font_color='#E2E8F0', height=480))
             
             st.markdown('<div class="panel-title" style="padding: 15px 15px 0 15px;">NETWORK GRAPH · LARVAL FLOW</div>', unsafe_allow_html=True)
             
@@ -107,8 +95,7 @@ with col1:
 
 # --- RIGHT COLUMN: DPI BAR CHART ---
 with col2:
-    # Keep height at 520
-    with st.container(border=True, height=520):
+    with st.container(border=True, height=560):
         if dpi_data:
             dpi_df = pd.DataFrame(list(dpi_data.items()), columns=['Site', 'DPI'])
             dpi_df['Site'] = dpi_df['Site'].str.replace("_", " ")
@@ -117,14 +104,13 @@ with col2:
             
             fig_dpi = px.bar(dpi_df, x='DPI', y='Site', orientation='h', color='Role', color_discrete_map={'Source (MPA)': '#00E5FF', 'Sink (Nearshore)': '#FF7043'})
             
-            # THE FIX: Reduced bottom margin to pull the x-axis closer to the edge
             fig_dpi.update_layout(
                 paper_bgcolor='#111A22', plot_bgcolor='#111A22', 
                 font_color='#E2E8F0', 
-                margin=dict(t=0, b=10, l=10, r=40), # Reduced bottom margin from 20 to 10
+                margin=dict(t=20, b=10, l=10, r=40), 
                 xaxis=dict(showgrid=True, gridcolor='#1E293B', title=dict(text="DPI Score", font=dict(color='#64748B', size=14)), tickfont=dict(color='#E2E8F0', size=12), range=[0, 1.15]), 
                 yaxis=dict(showgrid=False, title="", tickfont=dict(color='#E2E8F0', size=12)),
-                height=440, 
+                height=480, 
                 showlegend=False,
                 bargap=0.3 
             )
@@ -154,3 +140,23 @@ if not df_matrix.empty:
     chart_card("CONNECTIVITY MATRIX (PROBABILITY)", fig_matrix, df_matrix)
 else:
     st.error("Matrix data unavailable.")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# ==========================================
+# ROW 3: PLD & LARVAL RETENTION (Mock Data)
+# ==========================================
+col3, col4 = st.columns(2, vertical_alignment="top")
+
+with col3:
+    df_pld = pd.DataFrame({'Species': ['Porites', 'Dipsastraea'], 'PLD_Days': [8, 14]})
+    fig_pld = px.bar(df_pld, x='PLD_Days', y='Species', orientation='h', color_discrete_sequence=['#AB47BC'])
+    fig_pld.update_layout(paper_bgcolor='#111A22', plot_bgcolor='#111A22', font_color='#E2E8F0', margin=dict(t=10, b=10, l=10, r=10), xaxis=dict(showgrid=True, gridcolor='#1E293B', title="Days"), yaxis=dict(showgrid=False, title="Species"), height=330)
+    chart_card("PELAGIC LARVAE DURATION [MOCK DATA]", fig_pld, df_pld)
+
+with col4:
+    df_ret = pd.DataFrame({'Status': ['Retained (Self-Seeding)', 'Exported'], 'Percentage': [72.3, 27.7]})
+    fig_ret = px.pie(df_ret, names='Status', values='Percentage', hole=0.4, color_discrete_sequence=['#66BB6A', '#FF7043'])
+    fig_ret.update_traces(textposition='inside', textinfo='percent', insidetextfont=dict(color='#111A22', size=16))
+    fig_ret.update_layout(paper_bgcolor='#111A22', plot_bgcolor='#111A22', font_color='#E2E8F0', margin=dict(t=10, b=10, l=10, r=10), legend=dict(font=dict(color='#E2E8F0', size=12)), height=330)
+    chart_card("LARVAL RETENTION [MOCK DATA]", fig_ret, df_ret)

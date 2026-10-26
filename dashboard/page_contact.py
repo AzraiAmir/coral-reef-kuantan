@@ -9,9 +9,6 @@ st.markdown("For inquiries regarding the Azr.AI Coral Reef Monitoring project, p
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# ==========================================
-# 1. LOAD IMAGES SAFELY
-# ==========================================
 def get_base64_image(image_filename):
     img_path = Path(__file__).parent / "assets" / image_filename
     if img_path.exists():
@@ -27,12 +24,6 @@ img_pi = f'<img src="data:image/jpeg;base64,{b64_azrai}" style="width: 100%; hei
 img_sup1 = f'<img src="data:image/jpeg;base64,{b64_siti}" style="width: 100%; height: 100%; object-fit: cover;">'
 img_sup2 = f'<img src="data:image/jpeg;base64,{b64_faiz}" style="width: 100%; height: 100%; object-fit: cover;">'
 
-# Monotone Email Icon (SVG)
-email_icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 5px; margin-bottom: 2px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>'
-
-# ==========================================
-# 2. CARDS
-# ==========================================
 # --- ROW 1: PRINCIPAL INVESTIGATOR ---
 with st.container(border=False):
     html_pi = f"""
@@ -46,8 +37,8 @@ with st.container(border=False):
         <div style="width: 1px; height: 90px; background-color: #334155; margin: 0 30px;"></div>
         <div style="text-align: left; flex: 1.5;">
             <p style="margin: 0 0 8px 0; color: #94A3B8; font-size: 18px;">Principal Investigator / PhD Candidate</p>
-            <p style="margin: 0 0 15px 0; color: #64748B; font-size: 16px;">Department of Mechatronics, Kulliyyah of Engineering, IIUM</p>
-            <p style="margin: 0; font-size: 16px; color: #E2E8F0;">{email_icon} <b>Email:</b> <a href="mailto:azrai_amir@live.iium.edu.my" style="color: #FF7043; text-decoration: none;">azrai_amir@live.iium.edu.my</a></p>
+            <p style="margin: 0 0 15px 0; color: #64748B; font-size: 16px;">Department of Mechatronics,<br>Kulliyyah of Engineering, IIUM</p>
+            <p style="margin: 0; font-size: 16px; color: #E2E8F0;"><b>📧 Email:</b> <a href="mailto:azrai_amir@live.iium.edu.my" style="color: #FF7043; text-decoration: none;">azrai_amir@live.iium.edu.my</a></p>
         </div>
     </div>
     """
@@ -69,8 +60,8 @@ with col1:
             <div style="width: 1px; height: 100px; background-color: #334155; margin: 0 20px;"></div>
             <div style="text-align: left; flex: 1.5;">
                 <p style="margin: 0 0 6px 0; color: #94A3B8; font-size: 16px;">Professor</p>
-                <p style="margin: 0 0 15px 0; color: #64748B; font-size: 15px;">Department of Mechatronics, Kulliyyah of Engineering, IIUM</p>
-                <p style="margin: 0; font-size: 15px; color: #E2E8F0;">{email_icon} <b>Email:</b> <br><a href="mailto:tsfauziah@iium.edu.my" style="color: #FF7043; text-decoration: none;">tsfauziah@iium.edu.my</a></p>
+                <p style="margin: 0 0 15px 0; color: #64748B; font-size: 15px;">Department of Mechatronics,<br>Kulliyyah of Engineering, IIUM</p>
+                <p style="margin: 0; font-size: 15px; color: #E2E8F0;"><b>📧 Email:</b> <br><a href="mailto:tsfauziah@iium.edu.my" style="color: #FF7043; text-decoration: none;">tsfauziah@iium.edu.my</a></p>
             </div>
         </div>
         """
@@ -89,16 +80,14 @@ with col2:
             <div style="width: 1px; height: 100px; background-color: #334155; margin: 0 20px;"></div>
             <div style="text-align: left; flex: 1.5;">
                 <p style="margin: 0 0 6px 0; color: #94A3B8; font-size: 16px;">Coral Reef Ecologist</p>
-                <p style="margin: 0 0 15px 0; color: #64748B; font-size: 15px;">Advanced Coastal Research and Innovation, Kulliyyah of Science IIUM</p>
-                <p style="margin: 0; font-size: 15px; color: #E2E8F0;">{email_icon} <b>Email:</b> <br><a href="mailto:faizhanapiah@iium.edu.my" style="color: #FF7043; text-decoration: none;">faizhanapiah@iium.edu.my</a></p>
+                <p style="margin: 0 0 15px 0; color: #64748B; font-size: 15px;">Advanced Coastal Research and Innovation,<br>Kulliyyah of Science IIUM</p>
+                <p style="margin: 0; font-size: 15px; color: #E2E8F0;"><b>📧 Email:</b> <br><a href="mailto:faizhanapiah@iium.edu.my" style="color: #FF7043; text-decoration: none;">faizhanapiah@iium.edu.my</a></p>
             </div>
         </div>
         """
         st.markdown(textwrap.dedent(html_sup2), unsafe_allow_html=True)
 
-# ==========================================
-# 3. INTELLECTUAL PROPERTY NOTICE
-# ==========================================
+# --- INTELLECTUAL PROPERTY NOTICE ---
 st.markdown("""
 <div style="
     position: fixed;

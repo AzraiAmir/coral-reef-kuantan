@@ -35,15 +35,15 @@ with col2:
         st.markdown('<div class="panel-title" style="padding: 15px 15px 0 15px;">RAW UPLOADED DETECTIONS</div>', unsafe_allow_html=True)
         
         st.write("<br>**Latest YOLO Upload Results**", unsafe_allow_html=True)
-        # This file is generated when users upload images on Page 2
         upload_csv = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_d\uploaded_detections.csv")
         if upload_csv.exists():
             with open(upload_csv, "rb") as f:
                 st.download_button(label="Download Raw Detections CSV", data=f, file_name="uploaded_detections.csv", mime="text/csv", key="dl3", use_container_width=True)
         else:
-            st.info("No new uploads detected yet. Upload images on the 'Upload & Process' page first.")
+            st.info("No new uploads detected yet.")
             
         st.markdown("---")
         
         st.write("**GeoTIFF Rasters**")
-        st.info("🚧 Raster exports will be available once GPS coordinates are fully integrated.")
+        # Replaced the emoji with a monotone symbol
+        st.markdown("<div style='background-color: #1E293B; border: 1px solid #334155; padding: 10px; border-radius: 8px;'><span style='color: #00E5FF;'>ℹ</span> Raster exports will be available once GPS coordinates are fully integrated.</div>", unsafe_allow_html=True)
