@@ -12,7 +12,7 @@ st.title("Health & bleaching assessment")
 st.markdown("Bleaching severity index (KBI 0–4 scale) over time, with distribution of observed severity classes and per-site stress diagnostics.")
 
 # 1. LOAD REAL DATA
-# --- FIXED PATH HERE ---
+# --- FIXED PATH FOR STREAMLIT CLOUD ---
 BASE_DIR = Path(__file__).parent
 crca_dir = BASE_DIR / "data" / "crca"
 
