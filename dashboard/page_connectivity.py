@@ -13,8 +13,12 @@ st.title("Source-sink dynamics")
 st.markdown("Modelled larval connectivity between reef nodes. Edges indicate exchange probability; node colour denotes dominant role.")
 
 # 1. LOAD REAL DATA
-matrix_path = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_e\connectivity_matrix.csv")
-dpi_path = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_e\dpi.json")
+# Get the directory where this python file lives
+BASE_DIR = Path(__file__).parent
+
+# Point to the files inside the "data" folder
+matrix_path = BASE_DIR / "data" / "connectivity_matrix.csv"
+dpi_path = BASE_DIR / "data" / "dpi.json"
 
 df_matrix = pd.DataFrame()
 dpi_data = {}
