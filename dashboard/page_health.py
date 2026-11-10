@@ -12,7 +12,10 @@ st.title("Health & bleaching assessment")
 st.markdown("Bleaching severity index (KBI 0–4 scale) over time, with distribution of observed severity classes and per-site stress diagnostics.")
 
 # 1. LOAD REAL DATA
-crca_dir = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_d\crca")
+# --- FIXED PATH HERE ---
+BASE_DIR = Path(__file__).parent
+crca_dir = BASE_DIR / "data" / "crca"
+
 data = []
 if crca_dir.exists():
     for file in crca_dir.glob("*.json"):
