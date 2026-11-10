@@ -13,10 +13,7 @@ st.title("Source-sink dynamics")
 st.markdown("Modelled larval connectivity between reef nodes. Edges indicate exchange probability; node colour denotes dominant role.")
 
 # 1. LOAD REAL DATA
-# Get the directory where this python file lives
 BASE_DIR = Path(__file__).parent
-
-# Point to the files inside the "data" folder
 matrix_path = BASE_DIR / "data" / "connectivity_matrix.csv"
 dpi_path = BASE_DIR / "data" / "dpi.json"
 
@@ -124,7 +121,7 @@ with col2:
             st.markdown('<div class="panel-title" style="padding: 15px 15px 0 15px;">DISPERSAL POTENTIAL INDEX</div>', unsafe_allow_html=True)
             st.plotly_chart(fig_dpi, use_container_width=True, config={'displayModeBar': False})
         else:
-            st.error("dpi.json not found.")
+            st.error("dpi.json not found in the data folder.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -143,7 +140,7 @@ if not df_matrix.empty:
     
     chart_card("CONNECTIVITY MATRIX (PROBABILITY)", fig_matrix, df_matrix)
 else:
-    st.error("Matrix data unavailable.")
+    st.error("Matrix data unavailable. Make sure connectivity_matrix.csv is in the data folder.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
