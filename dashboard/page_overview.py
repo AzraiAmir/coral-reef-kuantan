@@ -12,7 +12,9 @@ st.markdown("Aggregated indicators across monitoring sites. Updated continuously
 # ==========================================
 # 1. LOAD REAL DATA
 # ==========================================
-base_dir = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_d")
+# --- FIXED PATH HERE ---
+BASE_DIR = Path(__file__).parent
+base_dir = BASE_DIR / "data"
 csv_path = base_dir / "site_summary.csv"
 json_path = base_dir / "detections_index.json"
 crca_dir = base_dir / "crca"
@@ -68,8 +70,7 @@ if csv_path.exists():
             health_scores = [0.0] * sites_count
             mean_kbi = 0.0
             
-        # Save the fixed dataframe back to CSV so the Map page works!
-        df_sites.to_csv(csv_path, index=False)
+        # REMOVED the to_csv line because Streamlit Cloud is read-only!
             
     except Exception as e:
         st.warning(f"Could not read site_summary.csv: {e}")
