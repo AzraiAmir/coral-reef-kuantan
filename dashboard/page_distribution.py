@@ -9,7 +9,11 @@ st.title("Spatial distribution maps")
 st.markdown("Geo-referenced coral cover and density across the surveyed reefs. Toggle layers for point density.")
 
 # 1. LOAD GPS DATA FROM SITE SUMMARY
-site_summary_path = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_d\site_summary.csv")
+BASE_DIR = Path(__file__).parent
+csv_path = BASE_DIR / "data" / "site_summary.csv"
+
+# Assuming you are using pandas:
+df = pd.read_csv(csv_path) 
 
 if site_summary_path.exists():
     df_gps = pd.read_csv(site_summary_path)
