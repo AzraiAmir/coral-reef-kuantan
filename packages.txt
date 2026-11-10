@@ -3,3 +3,4 @@ libgdal-dev
 libgeos-dev
 libproj-dev
 libgl1
+chromium
