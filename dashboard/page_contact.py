@@ -16,9 +16,9 @@ def get_base64_image(image_filename):
             return base64.b64encode(f.read()).decode()
     return ""
 
-b64_azrai = get_base64_image("azrai.JPG")
-b64_siti = get_base64_image("siti.JPG")
-b64_faiz = get_base64_image("faiz.JPG")
+b64_azrai = get_base64_image("azrai.jpg")
+b64_siti = get_base64_image("siti.jpg")
+b64_faiz = get_base64_image("faiz.jpg")
 
 img_pi = f'<img src="data:image/jpeg;base64,{b64_azrai}" style="width: 100%; height: 100%; object-fit: cover;">'
 img_sup1 = f'<img src="data:image/jpeg;base64,{b64_siti}" style="width: 100%; height: 100%; object-fit: cover;">'
