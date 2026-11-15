@@ -8,7 +8,7 @@ import numpy as np
 from pathlib import Path
 from utils import chart_card
 
-st.markdown('<div class="module-header">MODULE 05 · CONNECTIVITY</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 06 · CONNECTIVITY</div>', unsafe_allow_html=True)
 st.title("Source-sink dynamics")
 st.markdown("Modelled larval connectivity between reef nodes. Edges indicate exchange probability; node colour denotes dominant role.")
 

@@ -12,7 +12,7 @@ import time
 import json
 from geopy.geocoders import Nominatim
 
-st.markdown('<div class="module-header">MODULE 00 · INGEST</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 02 · INGEST</div>', unsafe_allow_html=True)
 st.title("Upload & Process")
 st.markdown("Ingest raw underwater imagery or video for automated detection and health assessment.")
 
@@ -105,7 +105,7 @@ with st.container(border=True):
     with col_lon: lon = st.number_input("Longitude", value=float(default_lon), format="%.5f")
 
     if lat != 0.0 and lon != 0.0:
-        st.map(pd.DataFrame({'lat': [lat], 'lon': [lon]}), zoom=10, use_container_width=True)
+        st.map(pd.DataFrame({'lat': [lat], 'lon': [lon]}), zoom=10, use_container_width=True, height=200) 
 
     st.markdown("<br>", unsafe_allow_html=True)
 

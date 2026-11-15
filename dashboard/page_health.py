@@ -7,7 +7,7 @@ import numpy as np
 from pathlib import Path
 from utils import chart_card
 
-st.markdown('<div class="module-header">MODULE 03 · HEALTH</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 04 · HEALTH</div>', unsafe_allow_html=True)
 st.title("Health & bleaching assessment")
 st.markdown("Bleaching severity index (KBI 0–4 scale) over time, with distribution of observed severity classes and per-site stress diagnostics.")
 

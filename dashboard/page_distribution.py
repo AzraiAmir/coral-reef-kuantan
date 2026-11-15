@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 from pathlib import Path
 from utils import chart_card # Assuming you use this for charts
 
-st.markdown('<div class="module-header">MODULE 02 · DISTRIBUTION</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 03 · DISTRIBUTION</div>', unsafe_allow_html=True)
 st.title("Spatial distribution maps")
 st.markdown("Geo-referenced coral cover and density across the surveyed reefs. Toggle layers for point density.")
 

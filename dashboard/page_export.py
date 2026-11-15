@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.markdown('<div class="module-header">MODULE 07 · EXPORT</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 08 · EXPORT</div>', unsafe_allow_html=True)
 st.title("Data export portal")
 st.markdown("Pull curated tabular datasets as CSV or request georeferenced rasters as GeoTIFF for GIS workflows.")
 

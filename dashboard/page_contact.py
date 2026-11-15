@@ -3,7 +3,7 @@ import textwrap
 import base64
 from pathlib import Path
 
-st.markdown('<div class="module-header">MODULE 08 · CONTACT</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 10 · CONTACT</div>', unsafe_allow_html=True)
 st.title("Contact Us")
 st.markdown("For inquiries regarding the Azr.AI Coral Reef Monitoring project, please reach out to the research team.")
 

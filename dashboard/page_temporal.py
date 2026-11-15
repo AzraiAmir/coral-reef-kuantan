@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from utils import chart_card
 
-st.markdown('<div class="module-header">MODULE 06 · TEMPORAL</div>', unsafe_allow_html=True)
+st.markdown('<div class="module-header">MODULE 07 · TEMPORAL</div>', unsafe_allow_html=True)
 st.title("Long-term temporal trends")
 st.markdown("Decadal shifts in ecological indicators with least-squares trend lines highlighting rate of change per metric.")
 

@@ -15,25 +15,44 @@ css_path = Path(__file__).parent / "assets" / "style.css"
 if css_path.exists():
     with open(css_path) as f: st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# 3. HIDE SCROLLBARS GLOBALLY & REDUCE PADDING
+# 3. FIX SIDEBAR SCROLLING & REDUCE PADDING
 st.markdown("""
 <style>
+    /* Responsive main container padding */
     .block-container {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
+    
+    /* Make the sidebar a flex column so it pushes the footer to the bottom */
     section[data-testid="stSidebar"] > div:first-child {
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* Full viewport height */
         padding-top: 1rem !important;
+        padding-bottom: 0 !important;
     }
-    section[data-testid="stSidebar"] > div {
-        overflow-y: hidden !important;
+
+    /* Allow the navigation area to scroll if it gets too long */
+    section[data-testid="stSidebar"] .nav-container {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-bottom: 20px;
     }
-    div[data-testid="stVerticalBlock"] > div[style*="height"]::-webkit-scrollbar {
-        display: none;
+
+    /* Hide the ugly default scrollbar but keep scrolling functional */
+    section[data-testid="stSidebar"] .nav-container::-webkit-scrollbar {
+        width: 4px;
     }
-    div[data-testid="stVerticalBlock"] > div[style*="height"] {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+    section[data-testid="stSidebar"] .nav-container::-webkit-scrollbar-thumb {
+        background-color: #334155;
+        border-radius: 4px;
+    }
+
+    /* Ensure the footer stays at the very bottom */
+    .floating-footer {
+        margin-top: auto;
+        flex-shrink: 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -59,7 +78,8 @@ with st.sidebar:
     logo_path = Path(__file__).parent / "assets" / "logo_full.png"
     if logo_path.exists():
         with open(logo_path, "rb") as f: logo_b64 = base64.b64encode(f.read()).decode()
-        st.markdown(f'<div style="text-align: center; margin-top: -20px; margin-bottom: 20px;"><img src="data:image/png;base64,{logo_b64}" style="width: 140px;"></div>', unsafe_allow_html=True)
+        # Changed width to 100% with a max-width so it scales down on small screens and caps at 180px on big screens
+        st.markdown(f'<div style="text-align: center; margin-top: -10px; margin-bottom: 10px;"><img src="data:image/png;base64,{logo_b64}" style="width: 100%; max-width: 160px; height: auto;"></div>', unsafe_allow_html=True)
     
     def get_class(title):
         return "nav-link active" if current_page == title else "nav-link"
