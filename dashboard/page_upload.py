@@ -26,10 +26,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Get the root directory relative to the dashboard folder
+PROJECT_ROOT = Path(__file__).parent.parent
+
 @st.cache_resource
 def load_model():
-    model_path = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\models\trained\yolov8s_coral\best.pt")
-    if model_path.exists(): return YOLO(str(model_path))
+    model_path = PROJECT_ROOT / "models" / "trained" / "yolov8s_coral" / "best.pt"
+    if model_path.exists(): 
+        return YOLO(str(model_path))
     return None
 
 model = load_model()
@@ -171,7 +175,9 @@ with st.container(border=True):
                 display_df = df.copy(); display_df.insert(0, 'No.', range(1, len(display_df) + 1))
                 st.dataframe(display_df, use_container_width=True, hide_index=True)
                 
-                site_summary_path = Path(r"C:\Users\mazra\Downloads\coral-reef-kuantan\results\phase_d\site_summary.csv")
+                # Note: Streamlit Cloud is read-only, so this will work locally but might fail on the cloud. 
+                # If you deploy to Streamlit Cloud, you should save this to session_state instead.
+                site_summary_path = PROJECT_ROOT / "results" / "phase_d" / "site_summary.csv"
                 if site_summary_path.exists():
                     summary_df = pd.read_csv(site_summary_path)
                     if 'KBI' in summary_df.columns: summary_df = summary_df.drop(columns=['KBI'])
