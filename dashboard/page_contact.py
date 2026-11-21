@@ -5,7 +5,7 @@ from pathlib import Path
 
 st.markdown('<div class="module-header">MODULE 10 · CONTACT</div>', unsafe_allow_html=True)
 st.title("Contact Us")
-st.markdown("For inquiries regarding the Azr.AI Coral Reef Monitoring project, please reach out to the research team.")
+st.markdown("For inquiries regarding the Azr-AI Coral Reef Monitoring project, please reach out to the research team.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -105,7 +105,7 @@ st.markdown("""
         <b>© 2026 Muhammad Azrai bin Amir.</b> All Rights Reserved.
     </p>
     <p style="color: #64748B; font-size: 11px; margin: 0; line-height: 1.4;">
-        The Azr.AI framework, source code, and visualizations are the intellectual property of the author, developed at IIUM.<br>
+        The Azr-AI framework, source code, and visualizations are the intellectual property of the author, developed at IIUM.<br>
         Unauthorized reproduction or distribution of this material is strictly prohibited.
     </p>
 </div>
