@@ -5,7 +5,7 @@ from pathlib import Path
 
 st.markdown('<div class="module-header">MODULE 10 · CONTACT</div>', unsafe_allow_html=True)
 st.title("Contact Us")
-st.markdown("For inquiries regarding the Azr-AI Coral Reef Monitoring project, please reach out to the research team.")
+st.markdown("For inquiries regarding the AZR-AI Coral Reef Monitoring project, please reach out to the research team.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 

@@ -2,7 +2,7 @@ import streamlit as st
 
 st.markdown('<div class="module-header">MODULE 09 · FAQ</div>', unsafe_allow_html=True)
 st.title("Frequently Asked Questions")
-st.markdown("Find answers to common questions regarding the Azr-AI system, model capabilities, and dashboard features.")
+st.markdown("Find answers to common questions regarding the AZR-AI system, model capabilities, and dashboard features.")
 
 # ==========================================
 # CUSTOM CSS FOR FAQ CARDS
