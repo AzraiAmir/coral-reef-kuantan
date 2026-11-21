@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 
 # 1. SET PAGE CONFIG
 st.set_page_config(
-    page_title="Azr.AI | Coral Health", 
+    page_title="Azr-AI | Coral Health", 
     page_icon="dashboard/assets/favicon.png", 
     layout="wide"
 )
@@ -163,7 +163,7 @@ col_title, col_logos = st.columns([2, 1], vertical_alignment="center")
 with col_title:
     st.markdown("""
     <h1 style="color: #E2E8F0; font-family: 'Space Mono', monospace; font-size: 1.3rem; letter-spacing: 1px; margin: 0; padding-bottom: 20px; line-height: 1.4;">
-        <span style="color: #00E5FF;">AZR.AI</span> | Automated Zonation & Reef Artificial Intelligence
+        <span style="color: #00E5FF;">AZR-AI</span> | Automated Zonation & Reef - Artificial Intelligence
     </h1>
     """, unsafe_allow_html=True)
 
