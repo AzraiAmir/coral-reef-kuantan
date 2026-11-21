@@ -2,7 +2,7 @@ import streamlit as st
 
 st.markdown('<div class="module-header">MODULE 09 · FAQ</div>', unsafe_allow_html=True)
 st.title("Frequently Asked Questions")
-st.markdown("Find answers to common questions regarding the Azr.AI system, model capabilities, and dashboard features.")
+st.markdown("Find answers to common questions regarding the Azr-AI system, model capabilities, and dashboard features.")
 
 # ==========================================
 # CUSTOM CSS FOR FAQ CARDS
@@ -66,7 +66,7 @@ st.markdown("### <span style='color:#00E5FF'>◈ About the System</span>", unsaf
 
 faq_card(
     "What is this dashboard about?", 
-    "This dashboard is the frontend interface for the <b>Azr.AI Coral Health Monitoring System</b>. It integrates deep learning (YOLOv8), colour analysis, and hydrodynamic modelling to monitor coral reef health in Kuantan. You can upload raw underwater imagery/video to detect species, calculate bleaching severity (KBI), and visualise spatial and connectivity data."
+    "This dashboard is the frontend interface for the <b>Azr-AI Coral Health Monitoring System</b>. It integrates deep learning (YOLOv8), colour analysis, and hydrodynamic modelling to monitor coral reef health in Kuantan. You can upload raw underwater imagery/video to detect species, calculate bleaching severity (KBI), and visualise spatial and connectivity data."
 )
 
 faq_card(
