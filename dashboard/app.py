@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 
 # 1. SET PAGE CONFIG
 st.set_page_config(
-    page_title="Azr-AI | Coral Health", 
+    page_title="AZR-AI | Coral Health", 
     page_icon="dashboard/assets/favicon.png", 
     layout="wide"
 )
