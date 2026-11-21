@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM  scripts\resume.bat — Resume Azr.AI work session
+REM  scripts\resume.bat — Resume Azr-AI work session
 REM
 REM  Run this FIRST at the start of every new CMD window
 REM  before running any phase command.
@@ -12,7 +12,7 @@ REM    3. Prints environment info for confirmation
 REM ============================================================
 
 echo.
-echo === Resuming Azr.AI work session ===
+echo === Resuming Azr-AI work session ===
 echo.
 
 REM --- 1. Activate conda environment ---
