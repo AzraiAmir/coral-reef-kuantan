@@ -105,7 +105,7 @@ st.markdown("""
         <b>© 2026 Muhammad Azrai bin Amir.</b> All Rights Reserved.
     </p>
     <p style="color: #64748B; font-size: 11px; margin: 0; line-height: 1.4;">
-        The Azr-AI framework, source code, and visualizations are the intellectual property of the author, developed at IIUM.<br>
+        The AZR-AI framework, source code, and visualizations are the intellectual property of the author, developed at IIUM.<br>
         Unauthorized reproduction or distribution of this material is strictly prohibited.
     </p>
 </div>
